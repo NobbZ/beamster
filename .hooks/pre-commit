@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+function check_generated_files {
+    result=0
+
+    test compiler/scanner.l -ot compiler/scanner.go
+    result=$(( $result + $? ))
+
+    return $result
+}
+
+check_generated_files
+generated_files_up_to_date=$?
+
+
+
+
+
+if [ $generated_files_up_to_date -ne 0 ]; then
+    echo "Generated files are out of sync, please run \`make\` once to regenerate"
+fi
+
+exit $generated_files_up_to_date
