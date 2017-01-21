@@ -15,3 +15,4 @@ mk_%/Makefile:
 
 .git/hooks/%: .hooks/%
 	cp $< $@
+	chmod +x $@

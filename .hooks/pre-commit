@@ -35,5 +35,5 @@ if [ $hook_files_up_to_date -ne 0 ]; then
     echo "Hooks are out of sync, please run \`make hooks\` once to re-sync"
 fi
 
-exit $generated_files_up_to_date \
-     + $hook_files_up_to_date
+exit $(( $generated_files_up_to_date \
+             + $hook_files_up_to_date ))
