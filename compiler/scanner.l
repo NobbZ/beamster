@@ -1,13 +1,18 @@
 %{
 package compiler
 
-func tokenize() {
+func lex(y *yylexer, lval *yySymType) int {
+	c := y.current
 %}
 
+%yyc c
+%yyn c = y.getc()
+
 %%
-	buf = buf[:0]
+	y.buf = y.buf[:0]
 
 [ ]+
 
 %%
+	return int(c)
 }

@@ -10,4 +10,4 @@ scanner.go: scanner.l
 	$(GOLEX) -o $@ $<
 
 parser.go: parser.y
-	go tool yacc -o $@ $<
+	go tool yacc -v $(@:%.go=%.output) -o $@ $<
