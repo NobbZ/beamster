@@ -6,6 +6,9 @@ function check_generated_files {
     test compiler/scanner.l -ot compiler/scanner.go
     result=$(( $result + $? ))
 
+    test compiler/parser.y -ot compiler/parser.go
+    result=$(( $result + $? ))
+
     return $result
 }
 

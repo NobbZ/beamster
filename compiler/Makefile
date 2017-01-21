@@ -4,7 +4,10 @@ GOBINPATH = $(GOPATH)/bin
 
 GOLEX = $(GOBINPATH)/golex
 
-all: scanner.go
+all: scanner.go parser.go
 
 scanner.go: scanner.l
 	$(GOLEX) -o $@ $<
+
+parser.go: parser.y
+	go tool yacc -o $@ $<
