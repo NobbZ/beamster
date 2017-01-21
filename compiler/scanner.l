@@ -5,7 +5,7 @@ func tokenize() {
 %}
 
 %%
-    buf = buf[:0]
+	buf = buf[:0]
 
 [ ]+
 
