@@ -7,6 +7,8 @@ package compiler
 
 }
 
+%token tokInt
+
 %%
 
 foo: /* empty */

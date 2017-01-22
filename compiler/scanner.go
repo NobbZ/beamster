@@ -2,8 +2,14 @@
 
 package compiler
 
+import "fmt"
+
 func lex(y *yylexer, lval *yySymType) int {
+	fmt.Println(y.src)
 	c := y.current
+	if y.empty {
+		c, y.empty = y.getc(), false
+	}
 
 yystate0:
 
@@ -21,18 +27,35 @@ yystart1:
 		goto yyabort
 	case c == ' ':
 		goto yystate2
+	case c >= '0' && c <= '9':
+		goto yystate3
 	}
 
 yystate2:
 	c = y.getc()
 	switch {
 	default:
-		goto yyrule1
+		goto yyrule2
 	case c == ' ':
 		goto yystate2
 	}
 
-yyrule1: // [ ]+
+yystate3:
+	c = y.getc()
+	switch {
+	default:
+		goto yyrule1
+	case c >= '0' && c <= '9':
+		goto yystate3
+	}
+
+yyrule1: // {DIGIT}+
+	{
+
+		fmt.Println("DIGIT", y.buf)
+		return tokInt
+	}
+yyrule2: // [ ]+
 
 	goto yystate0
 	panic("unreachable")

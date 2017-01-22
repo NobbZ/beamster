@@ -1,6 +1,9 @@
 package compiler
 
-import "bufio"
+import (
+	"bufio"
+	"fmt"
+)
 
 type yylexer struct{
 	src     *bufio.Reader
@@ -14,6 +17,7 @@ func (y *yylexer) Lex(lval *yySymType) int {
 }
 
 func (y *yylexer) getc() byte {
+	fmt.Println("Start", y.current)
 	if y.current != 0 {
 		y.buf = append(y.buf, y.current)
 	}
@@ -21,5 +25,6 @@ func (y *yylexer) getc() byte {
 	if b, err := y.src.ReadByte(); err == nil {
 		y.current = b
 	}
+	fmt.Println("Stop", y.current)
 	return y.current
 }

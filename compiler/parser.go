@@ -9,10 +9,13 @@ type yySymType struct {
 	yys int
 }
 
+const tokInt = 57346
+
 var yyToknames = [...]string{
 	"$end",
 	"error",
 	"$unk",
+	"tokInt",
 }
 var yyStatenames = [...]string{}
 
@@ -20,7 +23,7 @@ const yyEofCode = 1
 const yyErrCode = 2
 const yyInitialStackSize = 16
 
-//line parser.y:14
+//line parser.y:16
 //line yacctab:1
 var yyExca = [...]int{
 	-1, 1,
@@ -70,7 +73,7 @@ var yyTok1 = [...]int{
 }
 var yyTok2 = [...]int{
 
-	2, 3,
+	2, 3, 4,
 }
 var yyTok3 = [...]int{
 	0,
