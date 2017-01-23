@@ -49,6 +49,7 @@ yystate3:
 yyrule1: // {DIGIT}+
 	{
 
+		lval.string = string(y.buf)
 		return tokInt
 	}
 yyrule2: // [ ]+

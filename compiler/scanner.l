@@ -17,6 +17,7 @@ DIGIT [0-9]
 	y.buf = y.buf[:0]
 
 {DIGIT}+
+	lval.string = string(y.buf)
 	return tokInt
 
 [ ]+
