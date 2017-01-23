@@ -18,10 +18,8 @@ func TestScannerTokenRecognitionWithoutValue(t *testing.T) {
 
 	for _, data := range testData {
 		lexer := yylexer{
-			src:     bufio.NewReader(strings.NewReader(data.input)),
-			buf:     make([]byte, 100),
-			empty:   true,
-			current: 0,
+			src:   bufio.NewReader(strings.NewReader(data.input)),
+			empty: true,
 		}
 
 		lval := yySymType{}
@@ -44,10 +42,8 @@ func TestScannerTokenRecognitionWithValue(t *testing.T) {
 
 	for _, data := range testData {
 		lexer := yylexer{
-			src:     bufio.NewReader(strings.NewReader(data.input)),
-			buf:     make([]byte, 100),
-			empty:   true,
-			current: 0,
+			src:   bufio.NewReader(strings.NewReader(data.input)),
+			empty: true,
 		}
 
 		lval := yySymType{}
