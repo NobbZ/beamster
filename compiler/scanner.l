@@ -1,6 +1,12 @@
 %{
 package compiler
 
+import (
+	"math/big"
+	"strings"
+	"strconv"
+)
+
 func lex(y *yylexer, lval *yySymType) int {
 	c := y.current
 	if y.empty {
@@ -21,10 +27,23 @@ DIGIT [0-9_]
 
 {BASEDIGIT}+\|{BASE}
 	lval.string = string(y.buf)
+	parts := strings.Split(lval.string, "|")
+	number := parts[0]
+	base, _ := strconv.ParseInt(parts[1], 10, 32)
+	if val, ok := big.NewInt(0).SetString(number, int(base)); ok {
+		lval.int = val
+	} else {
+		return 0
+	}
 	return tokInt
 
 {DIGIT}+
 	lval.string = string(y.buf)
+	if val, ok := big.NewInt(0).SetString(strings.Replace(lval.string, "_", "", -1), 10); ok {
+		lval.int = val
+	} else {
+		return 0
+	}
 	return tokInt
 
 [ ]+
