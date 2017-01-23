@@ -2,10 +2,7 @@
 
 package compiler
 
-import "fmt"
-
 func lex(y *yylexer, lval *yySymType) int {
-	fmt.Println(y.src)
 	c := y.current
 	if y.empty {
 		c, y.empty = y.getc(), false
@@ -52,7 +49,6 @@ yystate3:
 yyrule1: // {DIGIT}+
 	{
 
-		fmt.Println("DIGIT", y.buf)
 		return tokInt
 	}
 yyrule2: // [ ]+
