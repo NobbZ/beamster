@@ -27,7 +27,7 @@ const yyEofCode = 1
 const yyErrCode = 2
 const yyInitialStackSize = 16
 
-//line parser.y:18
+//line parser.y:21
 //line yacctab:1
 var yyExca = [...]int{
 	-1, 1,
@@ -41,19 +41,19 @@ const yyPrivate = 57344
 var yyTokenNames []string
 var yyStates []string
 
-const yyLast = 1
+const yyLast = 2
 
 var yyAct = [...]int{
 
-	1,
+	2, 1,
 }
 var yyPact = [...]int{
 
-	-1000, -1000,
+	-4, -1000, -1000,
 }
 var yyPgo = [...]int{
 
-	0, 0,
+	0, 1,
 }
 var yyR1 = [...]int{
 
@@ -61,15 +61,15 @@ var yyR1 = [...]int{
 }
 var yyR2 = [...]int{
 
-	0, 0,
+	0, 1,
 }
 var yyChk = [...]int{
 
-	-1000, -1,
+	-1000, -1, 4,
 }
 var yyDef = [...]int{
 
-	1, -2,
+	0, -2, 1,
 }
 var yyTok1 = [...]int{
 
@@ -420,6 +420,12 @@ yydefault:
 	// dummy call; replaced with literal code
 	switch yynt {
 
+	case 1:
+		yyDollar = yyS[yypt-1 : yypt+1]
+		//line parser.y:16
+		{
+			yyVAL = yyDollar[1]
+		}
 	}
 	goto yystack /* stack new state and value */
 }

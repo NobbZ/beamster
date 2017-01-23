@@ -13,6 +13,9 @@ import "math/big"
 
 %%
 
-foo: /* empty */
+integer: tokInt {
+	$$ = $1
+}
+
 
 %%

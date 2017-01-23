@@ -1,28 +1,34 @@
 
 state 0
-	$accept: .foo $end 
-	foo: .    (1)
+	$accept: .integer $end 
 
-	.  reduce 1 (src line 16)
+	tokInt  shift 2
+	.  error
 
-	foo  goto 1
+	integer  goto 1
 
 state 1
-	$accept:  foo.$end 
+	$accept:  integer.$end 
 
 	$end  accept
 	.  error
 
 
+state 2
+	integer:  tokInt.    (1)
+
+	.  reduce 1 (src line 16)
+
+
 4 terminals, 2 nonterminals
-2 grammar rules, 2/2000 states
+2 grammar rules, 3/2000 states
 0 shift/reduce, 0 reduce/reduce conflicts reported
 51 working sets used
 memory: parser 0/30000
 0 extra closures
-0 shift entries, 1 exceptions
+1 shift entries, 1 exceptions
 1 goto entries
 0 entries saved by goto default
-Optimizer space used: output 1/30000
-1 table entries, 0 zero
-maximum spread: 0, maximum offset: 0
+Optimizer space used: output 2/30000
+2 table entries, 0 zero
+maximum spread: 4, maximum offset: 4
