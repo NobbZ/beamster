@@ -6,7 +6,8 @@ import __yyfmt__ "fmt"
 //line parser.y:2
 //line parser.y:6
 type yySymType struct {
-	yys int
+	yys    int
+	string string
 }
 
 const tokInt = 57346
