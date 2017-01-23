@@ -3,7 +3,7 @@ state 0
 	$accept: .foo $end 
 	foo: .    (1)
 
-	.  reduce 1 (src line 14)
+	.  reduce 1 (src line 16)
 
 	foo  goto 1
 

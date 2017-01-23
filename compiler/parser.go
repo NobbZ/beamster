@@ -4,10 +4,13 @@ package compiler
 import __yyfmt__ "fmt"
 
 //line parser.y:2
-//line parser.y:6
+import "math/big"
+
+//line parser.y:7
 type yySymType struct {
 	yys    int
 	string string
+	int    *big.Int
 }
 
 const tokInt = 57346
@@ -24,7 +27,7 @@ const yyEofCode = 1
 const yyErrCode = 2
 const yyInitialStackSize = 16
 
-//line parser.y:16
+//line parser.y:18
 //line yacctab:1
 var yyExca = [...]int{
 	-1, 1,
