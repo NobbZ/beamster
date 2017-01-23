@@ -11,10 +11,17 @@ func lex(y *yylexer, lval *yySymType) int {
 %yyc c
 %yyn c = y.getc()
 
+BASE ([2-9]|[1-2][0-9]|3[0-6])
+BASEDIGIT [0-9a-zA-Z]
+
 DIGIT [0-9]
 
 %%
 	y.buf = y.buf[:0]
+
+{BASEDIGIT}+\|{BASE}
+	lval.string = string(y.buf)
+	return tokInt
 
 {DIGIT}+
 	lval.string = string(y.buf)

@@ -12,6 +12,7 @@ func TestScannerTokenRecognitionWithoutValue(t *testing.T) {
 		expect int
 	}{
 		{"1", tokInt},
+		{"5|3", tokInt},
 	}
 
 	for _, data := range testData {
@@ -36,6 +37,7 @@ func TestScannerTokenRecognitionWithoutValue(t *testing.T) {
 func TestScannerTokenRecognitionWithValue(t *testing.T) {
 	testData := []struct{ input, expect string }{
 		{"1", "1"},
+		{"5|3", "5|3"},
 	}
 
 	for _, data := range testData {
