@@ -30,12 +30,14 @@ yystart1:
 		goto yyabort
 	case c == ' ':
 		goto yystate2
-	case c == '_':
-		goto yystate10
-	case c >= '0' && c <= '9':
+	case c == '+' || c == '-':
 		goto yystate3
-	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z':
+	case c == '_':
+		goto yystate11
+	case c >= '0' && c <= '9':
 		goto yystate4
+	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z':
+		goto yystate5
 	}
 
 yystate2:
@@ -51,26 +53,28 @@ yystate3:
 	c = y.getc()
 	switch {
 	default:
-		goto yyrule2
+		goto yyabort
 	case c == '_':
-		goto yystate10
-	case c == '|':
-		goto yystate5
+		goto yystate11
 	case c >= '0' && c <= '9':
-		goto yystate3
-	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z':
 		goto yystate4
+	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z':
+		goto yystate5
 	}
 
 yystate4:
 	c = y.getc()
 	switch {
 	default:
-		goto yyabort
+		goto yyrule2
+	case c == '_':
+		goto yystate11
 	case c == '|':
-		goto yystate5
-	case c >= '0' && c <= '9' || c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z':
+		goto yystate6
+	case c >= '0' && c <= '9':
 		goto yystate4
+	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z':
+		goto yystate5
 	}
 
 yystate5:
@@ -78,14 +82,10 @@ yystate5:
 	switch {
 	default:
 		goto yyabort
-	case c == '1':
+	case c == '|':
 		goto yystate6
-	case c == '2':
-		goto yystate8
-	case c == '3':
-		goto yystate9
-	case c >= '4' && c <= '9':
-		goto yystate7
+	case c >= '0' && c <= '9' || c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z':
+		goto yystate5
 	}
 
 yystate6:
@@ -93,42 +93,57 @@ yystate6:
 	switch {
 	default:
 		goto yyabort
-	case c >= '0' && c <= '9':
+	case c == '1':
 		goto yystate7
+	case c == '2':
+		goto yystate9
+	case c == '3':
+		goto yystate10
+	case c >= '4' && c <= '9':
+		goto yystate8
 	}
 
 yystate7:
 	c = y.getc()
-	goto yyrule1
+	switch {
+	default:
+		goto yyabort
+	case c >= '0' && c <= '9':
+		goto yystate8
+	}
 
 yystate8:
 	c = y.getc()
-	switch {
-	default:
-		goto yyrule1
-	case c >= '0' && c <= '9':
-		goto yystate7
-	}
+	goto yyrule1
 
 yystate9:
 	c = y.getc()
 	switch {
 	default:
 		goto yyrule1
-	case c >= '0' && c <= '6':
-		goto yystate7
+	case c >= '0' && c <= '9':
+		goto yystate8
 	}
 
 yystate10:
 	c = y.getc()
 	switch {
 	default:
-		goto yyrule2
-	case c >= '0' && c <= '9' || c == '_':
-		goto yystate10
+		goto yyrule1
+	case c >= '0' && c <= '6':
+		goto yystate8
 	}
 
-yyrule1: // {BASEDIGIT}+\|{BASE}
+yystate11:
+	c = y.getc()
+	switch {
+	default:
+		goto yyrule2
+	case c >= '0' && c <= '9' || c == '_':
+		goto yystate11
+	}
+
+yyrule1: // {SIGN}?{BASEDIGIT}+\|{BASE}
 	{
 
 		lval.string = string(y.buf)
@@ -142,7 +157,7 @@ yyrule1: // {BASEDIGIT}+\|{BASE}
 		}
 		return tokInt
 	}
-yyrule2: // {DIGIT}+
+yyrule2: // {SIGN}?{DIGIT}+
 	{
 
 		lval.string = string(y.buf)

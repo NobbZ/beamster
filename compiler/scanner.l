@@ -22,10 +22,12 @@ BASEDIGIT [0-9a-zA-Z]
 
 DIGIT [0-9_]
 
+SIGN [+-]
+
 %%
 	y.buf = y.buf[:0]
 
-{BASEDIGIT}+\|{BASE}
+{SIGN}?{BASEDIGIT}+\|{BASE}
 	lval.string = string(y.buf)
 	parts := strings.Split(lval.string, "|")
 	number := parts[0]
@@ -37,7 +39,7 @@ DIGIT [0-9_]
 	}
 	return tokInt
 
-{DIGIT}+
+{SIGN}?{DIGIT}+
 	lval.string = string(y.buf)
 	if val, ok := big.NewInt(0).SetString(strings.Replace(lval.string, "_", "", -1), 10); ok {
 		lval.int = val
