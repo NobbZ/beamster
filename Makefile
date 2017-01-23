@@ -6,11 +6,20 @@ GOLEX = $(GOBINPATH)/golex
 
 GIT_HOOKS = $(wildcard .hooks/*)
 
-all: $(SUBDIRS:%=mk_%) compile
+all: $(SUBDIRS:%=mk_%) format compile test bench
 
 compile:
 	go build ./...
 .PHONY: compile
+
+format:
+	go fmt ./...
+
+test:
+	go test ./...
+
+bench:
+	go test ./... -bench .
 
 hooks: $(GIT_HOOKS:.hooks/%=.git/hooks/%)
 
