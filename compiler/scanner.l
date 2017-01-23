@@ -14,7 +14,7 @@ func lex(y *yylexer, lval *yySymType) int {
 BASE ([2-9]|[1-2][0-9]|3[0-6])
 BASEDIGIT [0-9a-zA-Z]
 
-DIGIT [0-9]
+DIGIT [0-9_]
 
 %%
 	y.buf = y.buf[:0]

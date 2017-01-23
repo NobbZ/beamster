@@ -24,6 +24,8 @@ yystart1:
 		goto yyabort
 	case c == ' ':
 		goto yystate2
+	case c == '_':
+		goto yystate10
 	case c >= '0' && c <= '9':
 		goto yystate3
 	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z':
@@ -44,6 +46,8 @@ yystate3:
 	switch {
 	default:
 		goto yyrule2
+	case c == '_':
+		goto yystate10
 	case c == '|':
 		goto yystate5
 	case c >= '0' && c <= '9':
@@ -107,6 +111,15 @@ yystate9:
 		goto yyrule1
 	case c >= '0' && c <= '6':
 		goto yystate7
+	}
+
+yystate10:
+	c = y.getc()
+	switch {
+	default:
+		goto yyrule2
+	case c >= '0' && c <= '9' || c == '_':
+		goto yystate10
 	}
 
 yyrule1: // {BASEDIGIT}+\|{BASE}
