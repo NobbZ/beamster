@@ -7,15 +7,18 @@ import (
 )
 
 func TestScannerTokenRecognitionWithoutValue(t *testing.T) {
-	testData := []struct{input string; expect int}{
+	testData := []struct {
+		input  string
+		expect int
+	}{
 		{"1", tokInt},
 	}
 
 	for _, data := range testData {
 		lexer := yylexer{
-			src: bufio.NewReader(strings.NewReader(data.input)),
-			buf: make([]byte, 100),
-			empty: true,
+			src:     bufio.NewReader(strings.NewReader(data.input)),
+			buf:     make([]byte, 100),
+			empty:   true,
 			current: 0,
 		}
 
@@ -31,15 +34,15 @@ func TestScannerTokenRecognitionWithoutValue(t *testing.T) {
 }
 
 func TestScannerTokenRecognitionWithValue(t *testing.T) {
-	testData := []struct{input, expect string}{
+	testData := []struct{ input, expect string }{
 		{"1", "1"},
 	}
 
 	for _, data := range testData {
 		lexer := yylexer{
-			src: bufio.NewReader(strings.NewReader(data.input)),
-			buf: make([]byte, 100),
-			empty: true,
+			src:     bufio.NewReader(strings.NewReader(data.input)),
+			buf:     make([]byte, 100),
+			empty:   true,
 			current: 0,
 		}
 
