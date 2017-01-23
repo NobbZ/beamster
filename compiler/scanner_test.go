@@ -12,7 +12,7 @@ func TestScannerTokenRecognitionWithoutValue(t *testing.T) {
 		expect int
 	}{
 		{"1", tokInt},
-		{"5|3", tokInt},
+		{"5|6", tokInt},
 		{"1_000", tokInt},
 	}
 
@@ -28,7 +28,9 @@ func TestScannerTokenRecognitionWithoutValue(t *testing.T) {
 
 		if result != data.expect {
 			t.Error("Got", result,
-				"expected", data.expect)
+				"expected", data.expect,
+				"input was", data.input,
+			)
 		}
 	}
 }
