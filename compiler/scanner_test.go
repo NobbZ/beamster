@@ -57,3 +57,14 @@ func TestScannerTokenRecognitionWithValue(t *testing.T) {
 		}
 	}
 }
+
+func BenchmarkIntegerWithoutBase(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		lval := yySymType{}
+		lexer := &yylexer{
+			src:   bufio.NewReader(strings.NewReader("500")),
+			empty: true,
+		}
+		lexer.Lex(&lval)
+	}
+}
