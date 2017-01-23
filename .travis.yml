@@ -11,7 +11,11 @@ go:
   - 1.7.x
   - master
 
+install:
+  - go get -u github.com/alecthomas/gometalinter
+
 script:
-  - go build ./...
-  - go test ./...
-  - go test ./... -bench .
+  - make compile
+  - make test
+  - make bench
+  - make lint

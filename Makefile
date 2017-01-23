@@ -3,6 +3,7 @@ SUBDIRS = $(shell find . -mindepth 2 -name Makefile)
 GOBINPATH = $(GOPATH)/bin
 
 GOLEX = $(GOBINPATH)/golex
+GOMETALINTER = $(GOBINPATH)/gometalinter
 
 GIT_HOOKS = $(wildcard .hooks/*)
 
@@ -20,6 +21,9 @@ test:
 
 bench:
 	go test ./... -bench .
+
+lint:
+	$(GOMETALINTER) --enable-all -e "compiler/(scanner|parser).go" ./... --deadline 30s
 
 hooks: $(GIT_HOOKS:.hooks/%=.git/hooks/%)
 
