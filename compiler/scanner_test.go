@@ -23,21 +23,23 @@ func TestScannerTokenRecognitionWithoutValue(t *testing.T) {
 	}
 
 	for _, data := range testData {
-		lexer := yylexer{
-			src:   bufio.NewReader(strings.NewReader(data.input)),
-			empty: true,
-		}
+		t.Run(data.input, func(t *testing.T) {
+			lexer := yylexer{
+				src:   bufio.NewReader(strings.NewReader(data.input)),
+				empty: true,
+			}
 
-		lval := yySymType{}
+			lval := yySymType{}
 
-		result := (&lexer).Lex(&lval)
+			result := (&lexer).Lex(&lval)
 
-		if result != data.expect {
-			t.Error("Got", result,
-				"expected", data.expect,
-				"input was", data.input,
-			)
-		}
+			if result != data.expect {
+				t.Error("Got", result,
+					"expected", data.expect,
+					"input was", data.input,
+				)
+			}
+		})
 	}
 }
 
@@ -55,18 +57,20 @@ func TestScannerTokenRecognitionWithValue(t *testing.T) {
 	}
 
 	for _, data := range testData {
-		lexer := yylexer{
-			src:   bufio.NewReader(strings.NewReader(data.input)),
-			empty: true,
-		}
+		t.Run(data.input, func(t *testing.T) {
+			lexer := yylexer{
+				src:   bufio.NewReader(strings.NewReader(data.input)),
+				empty: true,
+			}
 
-		lval := yySymType{}
+			lval := yySymType{}
 
-		(&lexer).Lex(&lval)
+			(&lexer).Lex(&lval)
 
-		if lval.string != data.expect {
-			t.Errorf("Got %#v, expected %#v.\n", lval.string, data.expect)
-		}
+			if lval.string != data.expect {
+				t.Errorf("Got %#v, expected %#v.\n", lval.string, data.expect)
+			}
+		})
 	}
 }
 
