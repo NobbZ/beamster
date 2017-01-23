@@ -68,3 +68,14 @@ func BenchmarkIntegerWithoutBase(b *testing.B) {
 		lexer.Lex(&lval)
 	}
 }
+
+func BenchmarkIntegerWithBase(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		lval := yySymType{}
+		lexer := &yylexer{
+			src:   bufio.NewReader(strings.NewReader("500|32")),
+			empty: true,
+		}
+		lexer.Lex(&lval)
+	}
+}
