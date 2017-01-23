@@ -16,6 +16,12 @@ func TestScanInteger(t *testing.T) {
 		{"1", toBigInt("1", 10)},
 		{"5|6", toBigInt("5", 6)},
 		{"1_000", toBigInt("1000", 10)},
+		{"-1", toBigInt("-1", 10)},
+		{"-5|6", toBigInt("-5", 6)},
+		{"-1_000", toBigInt("-1000", 10)},
+		{"+1", toBigInt("+1", 10)},
+		{"+5|6", toBigInt("+5", 6)},
+		{"+1_000", toBigInt("+1000", 10)},
 	}
 
 	for _, data := range testData {
