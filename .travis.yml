@@ -10,6 +10,7 @@ go:
   - master
 
 install:
+  - go get -u github.com/cznic/golex
   - go get -u github.com/alecthomas/gometalinter
   - $GOPATH/bin/gometalinter --install
 

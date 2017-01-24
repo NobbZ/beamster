@@ -1,9 +1,9 @@
-//line parser.y:2
+//line parser.y:1
 package compiler
 
 import __yyfmt__ "fmt"
 
-//line parser.y:2
+//line parser.y:3
 import "math/big"
 
 //line parser.y:7

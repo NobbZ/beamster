@@ -33,3 +33,10 @@ mk_%/Makefile:
 .git/hooks/%: .hooks/%
 	cp $< $@
 	chmod +x $@
+
+golex:
+	go get -u github.com/cznic/golex
+
+gometalinter:
+	go get -u github.com/alecthomas/gometalinter
+	$(GOMETALINTER) --install
